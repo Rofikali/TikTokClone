@@ -74,26 +74,58 @@ const router = useRouter()
 
 let video = ref(null)
 
+// onMounted(() => {
+//     let observer = new IntersectionObserver(function (entries) {
+//         if (entries[0].isIntersecting) {
+//             console.log('Element is playing' + post.value.id);
+//             video.value.play()
+//         } else {
+//             console.log('Element is paused' + post.value.id);
+//             video.value.pause()
+//         }
+
+//     }, { threshold: [0.6] });
+
+//     observer.observe(document.getElementById(`PostMain-${post.value.id}`));
+// })
+
 onMounted(() => {
     let observer = new IntersectionObserver(function (entries) {
-        if (entries[0].isIntersecting) {
-            console.log('Element is playing' + post.value.id);
-            video.value.play()
-        } else {
-            console.log('Element is paused' + post.value.id);
-            video.value.pause()
-        }
+        if (!video.value) return; // Prevents error if video is not yet assigned
 
+        if (entries[0].isIntersecting) {
+            console.log('Element is playing ' + post.value.id);
+            video.value.play();
+        } else {
+            console.log('Element is paused ' + post.value.id);
+            video.value.pause();
+        }
     }, { threshold: [0.6] });
 
-    observer.observe(document.getElementById(`PostMain-${post.value.id}`));
-})
+    const element = document.getElementById(`PostMain-${post.value.id}`);
+    if (element) {
+        observer.observe(element);
+    } else {
+        console.warn(`Element PostMain-${post.value.id} not found`);
+    }
+});
+
+
+// onBeforeUnmount(() => {
+//     video.value.pause()
+//     video.value.currentTime = 0
+//     video.value.src = ''
+// })
 
 onBeforeUnmount(() => {
-    video.value.pause()
-    video.value.currentTime = 0
-    video.value.src = ''
+    console.log("Unmounting, video is:", video.value);
+    if (video.value) {
+        video.value.pause()
+        video.value.currentTime = 0
+        video.value.src = ''
+    }
 })
+
 
 const isLiked = computed(() => {
     let res = post.value.likes.find(like => like.user_id === $userStore.id)

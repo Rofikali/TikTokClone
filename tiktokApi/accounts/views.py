@@ -81,10 +81,10 @@ class RegisterUserViewSet(ViewSet):
     permission_classes = []  # Disable permissions for this route
 
     def create(self, request):
-        '''
+        """
         Registering a user
 
-        '''
+        """
         serializer = UserRegistrationSerializer(data=request.data)
 
         if serializer.is_valid(raise_exception=True):
@@ -104,7 +104,7 @@ class RegisterUserViewSet(ViewSet):
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 
-'''
+"""
 # class RegisterUserView(APIView):
 #     permission_classes = [AllowAny]
 
@@ -125,7 +125,7 @@ class RegisterUserViewSet(ViewSet):
 #                     status=status.HTTP_400_BAD_REQUEST,
 #                 )
 #         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
-'''
+"""
 
 
 class LoginView(APIView):
@@ -365,6 +365,7 @@ class PostDeleteView(APIView):
         except Exception as e:
             return Response({"error": str(e)}, status=status.HTTP_400_BAD_REQUEST)
 
+
 # working with it
 
 
@@ -373,18 +374,18 @@ class HomeViewSet(ViewSet):
     # pagination_class = CustomCursorPagination
 
     def list(self, request):
-        queryset = Post.objects.all().order_by('-created_at')
-        serializer = PostSerializer(queryset, many=True, context={'request': request})
-        return Response(serializer.data, status=status.HTTP_200_OK)
+        # queryset = Post.objects.all().order_by("-created_at")
+        # serializer = PostSerializer(queryset, many=True, context={"request": request})
+        # return Response(serializer.data, status=status.HTTP_200_OK)
 
-    # def list(self, request):
-    #     try:
-    #         queryset = Post.objects.all()
-    #         serializer = PostSerializer(
-    #             queryset, many=True, context={"request": request})
-    #         return Response(serializer.data, status=status.HTTP_200_OK)
-    #     except Exception as e:
-    #         return Response({"error": str(e)}, status=status.HTTP_400_BAD_REQUEST)
+        try:
+            queryset = Post.objects.all()
+            serializer = PostSerializer(
+                queryset, many=True, context={"request": request}
+            )
+            return Response(serializer.data, status=status.HTTP_200_OK)
+        except Exception as e:
+            return Response({"error": str(e)}, status=status.HTTP_400_BAD_REQUEST)
 
 
 '''
@@ -439,14 +440,12 @@ class ProfileView(APIView):
             return Response({"error": str(e)}, status=status.HTTP_400_BAD_REQUEST)
 
 
-class GlobalView(APIView):
-    permission_classes = [AllowAny]
-
+class GetRandomUsersViewSet(ViewSet):
     """
     API to get random suggested and followed users.
     """
 
-    def get(self, request):
+    def list(self, request):
         try:
             # Fetch random users for suggestions (limit to 5)
             suggested_users = User.objects.order_by("?")[:5]
@@ -469,6 +468,39 @@ class GlobalView(APIView):
             return Response({"error": str(e)}, status=status.HTTP_400_BAD_REQUEST)
 
 
+'''
+
+# class GlobalView(APIView):
+#     permission_classes = [AllowAny]
+
+#     """
+#     API to get random suggested and followed users.
+#     """
+
+#     def get(self, request):
+#         try:
+#             # Fetch random users for suggestions (limit to 5)
+#             suggested_users = User.objects.order_by("?")[:5]
+#             # Fetch random users for following (limit to 10)
+#             following_users = User.objects.order_by("?")[:10]
+
+#             # Serialize the data
+#             suggested_serializer = UserSerializer(suggested_users, many=True)
+#             following_serializer = UserSerializer(following_users, many=True)
+
+#             return Response(
+#                 {
+#                     "suggested": suggested_serializer.data,
+#                     "following": following_serializer.data,
+#                 },
+#                 status=status.HTTP_200_OK,
+#             )
+
+#         except Exception as e:
+#             return Response({"error": str(e)}, status=status.HTTP_400_BAD_REQUEST)
+'''
+
+
 class SendVerificationEmail(APIView):
     permission_classes = [IsAuthenticated]
 
@@ -485,8 +517,7 @@ class SendVerificationEmail(APIView):
 
         # Generate verification link
         verification_link = f"http://{get_current_site(request).domain}{
-            reverse('email_verification', kwargs={
-                    'uidb64': uid, 'token': token})
+            reverse('email_verification', kwargs={'uidb64': uid, 'token': token})
         }"
 
         # Send verification email
@@ -546,8 +577,7 @@ class RequestPasswordReset(APIView):
 
         # Generate the reset password link
         reset_password_link = f"http://{get_current_site(request).domain}{
-            reverse('password_reset_confirm', kwargs={
-                    'uidb64': uid, 'token': token})
+            reverse('password_reset_confirm', kwargs={'uidb64': uid, 'token': token})
         }"
 
         # Send the reset email
@@ -624,8 +654,7 @@ class PasswordResetLinkController(APIView):
 
         # Generate the password reset URL
         reset_url = f"http://{get_current_site(request).domain}{
-            reverse('password_reset_confirm', kwargs={
-                    'uidb64': uid, 'token': token})
+            reverse('password_reset_confirm', kwargs={'uidb64': uid, 'token': token})
         }"
 
         # Send email with the password reset link
@@ -693,8 +722,7 @@ def send_verification_email(user):
             "verification_url": verification_url,
         },
     )
-    send_mail(email_subject, email_message,
-              settings.DEFAULT_FROM_EMAIL, [user.email])
+    send_mail(email_subject, email_message, settings.DEFAULT_FROM_EMAIL, [user.email])
 
 
 class UserViewSet(viewsets.ModelViewSet):

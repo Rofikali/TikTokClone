@@ -12,7 +12,8 @@ node_modules
 # pyblics 
 public/*images
 public/images
-images
+# i am commenting this with base of my knowqledge
+# images
 
 # Logs
 logs
@@ -210,3 +211,6 @@ node_modules
 .env
 dist
 .DS_Store
+
+
+Momi.mp4
