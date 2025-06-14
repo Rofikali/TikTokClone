@@ -22,8 +22,8 @@
             <img class="absolute top-[18px] left-[70px] rounded-full lg:mx-0 mx-auto" width="45"
                 src="~/assets/images/tiktok-logo-small.png">
 
-            <video v-if="$generalStore.selectedPost.video" class="absolute object-cover w-full my-auto z-[-1] h-screen"
-                :src="$generalStore.selectedPost.video" />
+            <!-- <video v-if="$generalStore.selectedPost.video" class="absolute object-cover w-full my-auto z-[-1] h-screen"
+                :src="$generalStore.selectedPost.video" /> -->
 
             <div v-if="!isLoaded"
                 class="flex items-center justify-center bg-black bg-opacity-70 h-screen lg:min-w-[480px]">
@@ -158,7 +158,17 @@ onMounted(async () => {
     $generalStore.selectedPost = null
     try {
         await $generalStore.getPostById(route.params.id)
+        console.log('is id coming or not ', route.params.id)
+        if (!$generalStore.selectedPost) {
+            router.push('/')
+        } else {
+            // $generalStore.isBackUrl = $generalStore.getBackUrl(route.params.id)
+            // $generalStore.isBackUrl =  I WANT ONE STEP PREVIOUS POST URL
+            $generalStore.isBackUrl = getBackUrl(route.params.id)
+            console.log('isBackUrl is ', $generalStore.isBackUrl)
+        }
     } catch (error) {
+        console.log('errors in post page', error);
         if (error && error.response.status === 400) {
             router.push('/')
         }
@@ -173,10 +183,30 @@ onMounted(async () => {
     });
 })
 
+// WRITE SETBACKURL FUNCTION 
+const getBackUrl = (id) => {
+    let idArray = [...$generalStore.ids]
+    let index = idArray.indexOf(id)
+    if (index > 0) {
+        return `/post/${idArray[index - 1]}`
+    } else {
+        return '/'
+    }
+}
+
+
+// onBeforeUnmount(() => {
+//     video.value.pause()
+//     video.value.currentTime = 0
+//     video.value.src = ''
+// })
+// MADE ME 
 onBeforeUnmount(() => {
-    video.value.pause()
-    video.value.currentTime = 0
-    video.value.src = ''
+    if (video.value) {
+        video.value.pause()
+        video.value.currentTime = 0
+        video.value.src = ''
+    }
 })
 
 watch(() => isLoaded.value, () => {
@@ -185,45 +215,117 @@ watch(() => isLoaded.value, () => {
     }
 })
 
+// const loopThroughPostsDown = () => {
+//     setTimeout(() => {
+//         // let idArrayReversed = $generalStore.ids.reverse()
+//         let idArrayReversed = [...$generalStore.ids].reverse()
+
+//         let isBreak = false
+//         // onBeforeUnmount(() => {
+//         //   video.value.pause()
+//         //   video.value.currentTime = 0
+//         //   video.value.src = ''
+//         // })
+//         onBeforeUnmount(() => {
+//             if (video.value) {
+//                 video.value.pause()
+//                 video.value.currentTime = 0
+//                 video.value.src = ''
+//             }
+//         })
+
+//         for (let i = 0; i < idArrayReversed.length; i++) {
+//             const id = idArrayReversed[i];
+//             if (id < route.params.id) {
+//                 // router.push(`/post/${id}`)
+//                 router.push({ name: 'post-id', params: { id: id } })
+//                 isBreak = true
+//                 return
+//             }
+//         }
+
+//         if (!isBreak) {
+//             // router.push(`/ post / ${idArrayReversed[0]} `)
+//             route.push({ name: 'post-id', params: { id: idArrayReversed[0] } })
+//         }
+//     }, 300)
+// }
+
 const loopThroughPostsDown = () => {
     setTimeout(() => {
-        let idArrayReversed = $generalStore.ids.reverse()
-        let isBreak = false
+        let idArrayReversed = [...$generalStore.ids].reverse();
+        let isBreak = false;
+
+        // ✅ Properly destroy video manually
+        if (video.value) {
+            video.value.pause();
+            video.value.currentTime = 0;
+            video.value.src = '';
+        }
 
         for (let i = 0; i < idArrayReversed.length; i++) {
             const id = idArrayReversed[i];
             if (id < route.params.id) {
-                router.push(`/post/${id}`)
-                isBreak = true
-                return
+                router.push({ name: 'post-id', params: { id } });
+                isBreak = true;
+                return;
             }
         }
 
         if (!isBreak) {
-            router.push(`/post/${idArrayReversed[0]}`)
+            router.push({ name: 'post-id', params: { id: idArrayReversed[0] } });
         }
-    }, 300)
-}
-
+    }, 300);
+};
 
 const loopThroughPostsUp = () => {
     setTimeout(() => {
-        let isBreak = false
+        let idArrayReversed = [...$generalStore.ids].reverse();
+        let isBreak = false;
 
-        for (let i = 0; i < $generalStore.ids.length; i++) {
-            const id = $generalStore.ids[i];
-            if (id > route.params.id) {
-                router.push(`/post/${id}`)
-                isBreak = true
-                return
+        // ✅ Properly destroy video manually
+        if (video.value) {
+            video.value.pause();
+            video.value.currentTime = 0;
+            video.value.src = '';
+        }
+
+        for (let i = 0; i < idArrayReversed.length; i++) {
+            const id = idArrayReversed[i];
+            if (id < route.params.id) {
+                router.push({ name: 'post-id', params: { id } });
+                isBreak = true;
+                return;
             }
         }
 
         if (!isBreak) {
-            router.push(`/post/${$generalStore.ids[0]}`)
+            router.push({ name: 'post-id', params: { id: idArrayReversed[0] } });
         }
-    }, 300)
-}
+    }, 300);
+};
+
+
+// const loopThroughPostsUp = () => {
+//     setTimeout(() => {
+//         let isBreak = false
+
+//         for (let i = 0; i < $generalStore.ids.length; i++) {
+//             const id = $generalStore.ids[i];
+//             if (id > route.params.id) {
+//                 // router.push(`/ post / ${id} `)
+//                 route.push({ name: 'post-id', params: { id: id } })
+//                 isBreak = true
+//                 return
+//             }
+//         }
+
+//         if (!isBreak) {
+//             // router.push(`/ post / ${$generalStore.ids[0]} `)
+//             route.push({ name: 'post-id', params: { id: $generalStore.ids[0] } })
+//         }
+//     }, 300)
+// }
 
 const isLiked = computed(() => {
     let res = $generalStore.selectedPost.likes.find(like => like.user_id === $userStore.id)
@@ -235,6 +337,28 @@ const isLiked = computed(() => {
 
 const likePost = async () => {
     try {
+        console.log('logs here')
+        let res = $generalStore.selectedPost.likes.find(like => like.user_id === $userStore.id)
+        if (res) {
+            return
+        }
+        console.log('logs here 2')
+        if (!$generalStore.selectedPost) {
+            return
+        }
+        console.log('logs here 3')
+        if ($generalStore.selectedPost.user.id === $userStore.id) {
+            return
+        }
+        console.log('logs here 4')
+        if ($generalStore.selectedPost.likes.length >= 1000) {
+            return
+        }
+        console.log('logs here 5')
+        if ($generalStore.selectedPost.likes.length < 1000) {
+            console.log('logs here 6')
+        }
+
         await $userStore.likePost($generalStore.selectedPost, true)
     } catch (error) {
         console.log(error)
@@ -255,7 +379,7 @@ const deletePost = async () => {
         if (res) {
             await $userStore.deletePost($generalStore.selectedPost)
             await $profileStore.getProfile($userStore.id)
-            router.push(`/profile/${$userStore.id}`)
+            router.push(`/ profile / ${$userStore.id} `)
         }
     } catch (error) {
         console.log(error)

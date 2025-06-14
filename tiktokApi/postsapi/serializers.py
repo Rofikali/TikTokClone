@@ -15,7 +15,6 @@ class PostSerializer(serializers.ModelSerializer):
     video = serializers.SerializerMethodField()
     created_at = serializers.SerializerMethodField()
 
-
     class Meta:
         model = Post
         fields = ["id", "text", "video", "created_at", "comments", "likes", "user"]

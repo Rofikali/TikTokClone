@@ -119,7 +119,6 @@ export const useUserStore = defineStore('user', () => {
       // Step 3: Make POST request with withCredentials
       const res = await $axios.post(
         '/api/loggedinuser/',
-        {},
         {
           withCredentials: true,
           headers: {
@@ -200,11 +199,18 @@ export const useUserStore = defineStore('user', () => {
   }
 
   async function addComment(post, comment) {
-    const res = await $axios.post('/api/comments', {
-      post_id: post.id,
-      comment,
-    })
-
+    const res = await $axios.post('/api/comments/post/',
+      {
+        post_id: post.id,
+        comment,
+      },
+      {
+        withCredentials: true,
+        headers: {
+          'Authorization': `Token ${useCookie('csrftoken').value}`,
+          'X-CSRFToken': useCookie('csrftoken').value || ''
+        }
+      })
     if (res.status === 200) {
       await updateComments(post)
     }
@@ -230,6 +236,7 @@ export const useUserStore = defineStore('user', () => {
       }
     }
   }
+
 
   async function likePost(post, isPostPage) {
     const generalStore = useGeneralStore()
@@ -271,29 +278,21 @@ export const useUserStore = defineStore('user', () => {
     }
   }
 
+  // async function logout() {
+  //   await $axios.post('/api/logout/')
+  //   resetUser()
+  // }
+
   async function logout() {
-    // Get the CSRF token from the cookie
-    let csrfToken = useCookie('csrftoken').value
-
-    if (!csrfToken) {
-      console.warn('⚠️ CSRF token not found. Attempting to fetch tokens...')
-      await getTokens()
-      csrfToken = useCookie('csrftoken').value
-
-      if (!csrfToken) {
-        console.error('❌ Still no CSRF token after trying to fetch')
-        return null
-      }
-    } else {
-      console.log('✅ CSRF token already available:', csrfToken)
-    }
 
     try {
       const res = await $axios.post('/api/logout/', {}, {
+        // withCredentials: true, // ✅ sends/receives cookies like `sessionid`
         withCredentials: true,
         headers: {
-          'X-CSRFToken': csrfToken,
-        },
+          'Authorization': `Token ${useCookie('csrftoken').value}`,
+          'X-CSRFToken': useCookie('csrftoken').value || ''
+        }
       })
     } catch (error) {
       console.error('❌ Error during logout:', error.response?.data || error.message)

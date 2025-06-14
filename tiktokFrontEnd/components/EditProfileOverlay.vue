@@ -6,7 +6,7 @@ import 'vue-advanced-cropper/dist/style.css'
 import { storeToRefs } from 'pinia'
 
 const { $userStore, $generalStore, $profileStore } = useNuxtApp()
-const { name, username, bio, image } = storeToRefs($userStore)
+const { name, bio, image } = storeToRefs($userStore)
 const route = useRoute()
 
 // Reactive state
@@ -21,8 +21,7 @@ const isUpdated = ref(false)
 
 // Initialize local state from store on mount
 onMounted(() => {
-    Name.value = name.value
-    userName.value = username.value
+    userName.value = name.value
     userBio.value = bio.value
     userImage.value = image.value
 })
