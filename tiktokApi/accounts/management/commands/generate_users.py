@@ -1,10 +1,10 @@
-from django.core.management.base import BaseCommand
-from django.utils.crypto import get_random_string
+from pathlib import Path
+
 from accounts.models import User
-from faker import Faker
 from django.contrib.auth import get_user_model
 from django.core.files import File
-from pathlib import Path
+from django.core.management.base import BaseCommand
+from faker import Faker
 
 User = get_user_model()  # Use the custom user model defined in settings
 fake = Faker()
@@ -34,7 +34,7 @@ class Command(BaseCommand):
             # username =
             # i wnat micky_1, _2 like this
             username = (
-                f"micky{_ + 1}"  # Generates usernames like micky_1, micky_2, etc.
+                f"admin{_ + 1}"  # Generates usernames like micky_1, micky_2, etc.
             )
             name = fake.name()
             password = "password123"  # 🔴 change this password if needed

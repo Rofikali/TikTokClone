@@ -1,5 +1,5 @@
 import { useUserStore } from "~/stores/user"
-import { useProfileStore } from "~/stores/profile"
+import { useProfileStore } from "~/EXTRAS/profile"
 import { useGeneralStore } from "~/stores/general"
 
 export default defineNuxtPlugin((NuxtApp) => {

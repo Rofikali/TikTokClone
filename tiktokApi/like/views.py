@@ -1,7 +1,3 @@
-from ast import Return
-from tabnanny import check
-from requests import post
-from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import status
 from django.shortcuts import get_object_or_404
@@ -9,19 +5,15 @@ from django.shortcuts import get_object_or_404
 # from accounts.models import Post
 from postsapi.models import Post
 from .models import Like
-from .service.post_service import PostService
 from .serializers import LikeSerializer
 from .utils import LikeCache  # Import LikeCache class
 
 # from rest_framework import viewsets, status
 from rest_framework.viewsets import ViewSet
-from rest_framework import status
 from rest_framework.decorators import action
-from rest_framework.response import Response
 from rest_framework.permissions import IsAuthenticated
 
-from .models import Like, Post
-from .serializers import LikeSerializer
+from .models import Post
 
 # from .cache import LikeCache  # Assuming you have this
 from rest_framework.authentication import SessionAuthentication
@@ -82,6 +74,7 @@ class LikeDeleteViewSet(ViewSet):
     """
     ViewSet to handle liking and unliking posts.
     """
+
     authentication_classes = [SessionAuthentication]
     permission_classes = [IsAuthenticated]
 
@@ -90,7 +83,6 @@ class LikeDeleteViewSet(ViewSet):
         responses={200: LikeSerializer},
         tags=["Likes"],
     )
-
     def destroy(self, request, pk=None):
         """
         DELETE /api/likes/{id}/ → Unlike a post (delete like)
@@ -119,16 +111,9 @@ class LikeDeleteViewSet(ViewSet):
             likes_count = LikeCache.get_cached_likes_count(post_id)
 
             return Response(
-                {
-                    "like": like_data,
-                    "likes_count": likes_count,
-                    "success": "OK"
-                },
+                {"like": like_data, "likes_count": likes_count, "success": "OK"},
                 status=status.HTTP_200_OK,
             )
 
         except Exception as e:
             return Response({"error": str(e)}, status=status.HTTP_400_BAD_REQUEST)
-
-
-
