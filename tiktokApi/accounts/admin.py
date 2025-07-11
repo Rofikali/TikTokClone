@@ -27,7 +27,7 @@ class UserAdmin(BaseUserAdmin):
     # Fields to edit in the admin panel
     fieldsets = (
         (None, {"fields": ("email", "password")}),
-        (_("Personal Info"), {"fields": ("name", "bio", "image")}),
+        (_("Personal Info"), {"fields": ("name",'username', "bio", "image")}),
         (
             _("Permissions"),
             {"fields": ("is_staff", "is_active", "groups", "user_permissions")},
@@ -50,33 +50,3 @@ class UserAdmin(BaseUserAdmin):
     search_fields = ("email", "name")
     ordering = ("email",)
 
-
-# class PostAdmin(admin.ModelAdmin):
-#     # list_display = ('id', 'text', 'video', 'created_at', 'updated_at')
-#     list_display = ('id', 'user', 'text', 'video', 'created_at', 'updated_at')
-#     list_filter = ('created_at', 'user')
-#     search_fields = ('user__username', 'text')
-#     ordering = ('-created_at',)
-
-
-# class LikeAdmin(admin.ModelAdmin):
-#     list_display = ('user', 'post', 'created_at', 'updated_at')
-#     list_filter = ('created_at', 'user', 'post')
-#     search_fields = ('user__username', 'post__id')
-
-# Register the Comment model
-
-
-# class CommentAdmin(admin.ModelAdmin):
-#     list_display = ('user', 'post', 'text', 'created_at', 'updated_at')
-#     list_filter = ('created_at', 'updated_at', 'user', 'post')
-#     search_fields = ('user__username', 'post__id', 'text')
-
-
-# Register models to the admin panel
-# admin.site.register(User, CustomUserAdmin)
-# admin.site.register(User, UserAdmin)
-# admin.site.register(Post, PostAdmin)
-# admin.site.register(Like, LikeAdmin)
-# admin.site.register(Comment, CommentAdmin)
-# admin.site.register(Token, TokenAdmin)

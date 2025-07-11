@@ -5,7 +5,7 @@ from .models import Like
 
 @admin.register(Like)
 class LikeAdmin(admin.ModelAdmin):
-    list_display = ('user', 'post', 'created_at', 'updated_at')
+    list_display = ('id', 'user', 'created_at', 'updated_at','post')
     list_filter = ('created_at', 'user', 'post')
     search_fields = ('user__username', 'post__id')
 

@@ -4,18 +4,14 @@ need to merge ( features/accounts with features/profile )
 
 ## 1. uv venv
 
+source .venv/Scripts/activate
+
 ## 2. install all requirements.txt data
 uv pip install -r requirements.txt 
 
 ## To Install From an Existing pyproject.toml
 uv pip install -r pyproject.toml
 
-<<<<<<< HEAD
-## python manage.py makemigrations accounts comments like postsapi 
-python manage.py makemigrations accounts comments like postsapi 
-python manage.py migrate
-python manage.py createsuperuser
-=======
 ## python manage.py makemigrations
 python manage.py makemigrations accounts like
 python manage.py migrate
@@ -41,8 +37,13 @@ Password (again): admin1
 ## generate fake posts with videos
 python manage.py generate_posts
 
+## generate fake user with videos
+python manage.py generate_users
 
->>>>>>> master
+## generate fake user with videos
+python manage.py generate_likes
+
+what the hell 
 
 <!-- I CREATE MODELS
 ACCOUNTS ( FOR USER LOGIN REGISTER LIKE WORK )

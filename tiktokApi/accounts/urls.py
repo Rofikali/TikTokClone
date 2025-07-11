@@ -159,12 +159,16 @@
 
 
 from inspect import getmembers, isclass
+import profile
 
 from django.urls import include, path
 from rest_framework.routers import DefaultRouter
 from rest_framework.viewsets import ViewSet
 
 from . import views
+# ✅ Manual nested routes for special URLs
+# profile_post_list = views.lePostsViewSet.as_view({'get': 'list'})
+# profile_post_list = views.ProfilePostListViewSet.as_view({'get': 'list'})
 
 router = DefaultRouter()
 
@@ -177,8 +181,15 @@ for name, cls in getmembers(views, isclass):
 
 # router.register(r"productlist", views.ProductListViewSet, basename="productlist")
 
+
 urlpatterns = [
     # Register the routes under '/api/mod5/'
     path("", include(router.urls)),
+    # 🚀 Nested routes with dynamic user ID
+    path(
+        "profile/<int:user_id>/posts/",
+        views.ProfilePostViewSet.as_view({"get": "list"}),
+        name="profile-posts",
+    ),
     # Manually add the custom path for DynamicCategoryURLFilterViewSet
 ]

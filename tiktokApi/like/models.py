@@ -17,16 +17,16 @@ class LikeManager(models.Manager):
 
 
 class Like(AutoUpdate):
-    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name="likes")
-    post = models.ForeignKey(Post, on_delete=models.CASCADE, related_name="likes")
+    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name="liked_user")
+    post = models.ForeignKey(Post, on_delete=models.CASCADE, related_name="liked_post")
 
     objects = LikeManager()
 
     def __str__(self):
-        return f"Like by {self.user.username} on Post {self.post.id}"
+        return f"Like by {self.user.username} on Post {self.post.id} and { self.post.text[:20] }..."
 
 
-class LikesCount(models.Model):
+class LikesCount(models.Model): 
     post = models.OneToOneField(
         Post, on_delete=models.CASCADE, related_name="likes_count"
     )

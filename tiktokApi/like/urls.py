@@ -38,7 +38,6 @@ urlpatterns = [
     # Manually add the custom path for DynamicCategoryURLFilterViewSet
 ]
 
-
 # from django.urls import path
 # from .views import LikeCreateView, LikeDeleteView, LikeView
 # # from .views import LikesCountView, LikeCreateView, LikeDeleteView, LikeView

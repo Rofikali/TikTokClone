@@ -9,6 +9,9 @@ crete new route for
     --->    Not Done
         ---> Like Count with Username
 
+Profile Problem Solved
+    ---> 
+
 
 Delete Comment --->
 

@@ -1,6 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import BaseUserManager, AbstractUser
-
+from core.models import AutoUpdate
 
 class CustomUserManager(BaseUserManager):
     """
@@ -29,15 +29,8 @@ class CustomUserManager(BaseUserManager):
         return self.create_user(email, password, **extra_fields)
 
 
-# class AutoUpdate(models.Model):
-#     created_at = models.DateTimeField(auto_now_add=True)
-#     updated_at = models.DateTimeField(auto_now=True)
 
-#     class Meta:
-#         abstract = True
-
-
-class User(AbstractUser):
+class User(AbstractUser, AutoUpdate):
     """
     Custom User model extending AbstractUser.
     """
@@ -52,7 +45,7 @@ class User(AbstractUser):
         null=True,
         help_text="This Field is not Required",
     )  # Make username optional
-    name = models.CharField(max_length=255, blank=True, null=True)
+    name = models.CharField(max_length=255, help_text="this field is required")
 
     # Custom manager
     objects = CustomUserManager()
@@ -62,20 +55,3 @@ class User(AbstractUser):
 
     def __str__(self):
         return self.email
-
-
-# class Post(AutoUpdate):
-#     # user = models.ForeignKey('api.User', on_delete=models.CASCADE)  # Use 'api.User'
-#     user = models.ForeignKey(
-#         User,  # Refers to the custom User model
-#         on_delete=models.CASCADE,
-#         related_name="posts",  # Reverse relationship (user.posts.all())
-#     )
-#     text = models.TextField()
-#     video = models.FileField(upload_to="videos/", null=True, blank=True)
-
-#     def __str__(self):
-#         return f"Post by {self.user.username} on {self.text}"
-
-#     class Meta:
-#         ordering = ["-created_at"]  # Latest posts appear first
