@@ -4,6 +4,8 @@ need to merge ( features/accounts with features/profile )
 
 ## 1. uv venv
 
+source .venv/Scripts/activate
+
 ## 2. install all requirements.txt data
 uv pip install -r requirements.txt 
 

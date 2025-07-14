@@ -99,3 +99,10 @@ const isLoggedIn = (user) => {
     setTimeout(() => router.push(`/profile/${user.id}`), 200)
 }
 </script>
+<style scoped>
+body {
+    background-color: #a6f5f5;
+    /* dark grey */
+    color: rgb(44, 40, 40);
+}
+</style>

@@ -1,12 +1,6 @@
-from urllib import request
 from django.conf import settings
-from comments.serializers import CommentSerializer
-from like.serializers import LikeSerializer
-from like.models import Like
 
 # from django.contrib.auth import get_user_model
-from django.contrib.auth.hashers import make_password
-from django.utils.html import format_html
 # from .models import Post
 
 # from .models import Post, Comment, Like
@@ -141,22 +135,22 @@ class UserSerializer(serializers.ModelSerializer):
     def get_image(self, obj):
         request = self.context.get("request")
 
-        print(f"[DEBUG] Entered get_image for user: {getattr(obj, 'id', 'Unknown')}")
-        print(
-            f"[DEBUG] Has image attribute? {'Yes' if hasattr(obj, 'image') else 'No'}"
-        )
+        # print(f"[DEBUG] Entered get_image for user: {getattr(obj, 'id', 'Unknown')}")
+        # print(
+        #     f"[DEBUG] Has image attribute? {'Yes' if hasattr(obj, 'image') else 'No'}"
+        # )
 
         if hasattr(obj, "image") and obj.image and hasattr(obj.image, "url"):
-            print(f"[DEBUG] Image field is present and has URL: {obj.image}")
+            # print(f"[DEBUG] Image field is present and has URL: {obj.image}")
             try:
                 image_url = obj.image.url
-                print(f"[DEBUG] Image URL resolved: {image_url}")
+                # print(f"[DEBUG] Image URL resolved: {image_url}")
                 full_url = (
                     request.build_absolute_uri(image_url)
                     if request
                     else f"{settings.MEDIA_URL}{image_url}"
                 )
-                print(f"[DEBUG] Final image URL: {full_url}")
+                # print(f"[DEBUG] Final image URL: {full_url}")
                 return full_url
             except ValueError as e:
                 print(f"[ERROR] No image file for user {obj.id}: {e}")
@@ -176,6 +170,7 @@ class UserSerializer(serializers.ModelSerializer):
 #     top = serializers.FloatField()
 #     left = serializers.FloatField()
 #     image = serializers.ImageField()
+
 
 class UpdateUserImageSerializer(serializers.Serializer):
     image = serializers.ImageField(required=True)

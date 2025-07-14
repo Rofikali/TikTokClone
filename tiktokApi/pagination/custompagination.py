@@ -1,6 +1,7 @@
 # from rest_framework.pagination import PageNumberPagination
 from rest_framework.pagination import CursorPagination
 from rest_framework.response import Response
+
 # from datetime import datetime
 
 # class CustomCursorPagination(CursorPagination):
@@ -22,7 +23,7 @@ from rest_framework.response import Response
 class CustomCursorPagination(CursorPagination):
     page_size = 10  # Default number of items per page
     page_size_query_param = "page_size"  # Allow client to specify page size
-    max_page_size = 20  # Maximum page size allowed
+    max_page_size = 15  # Maximum page size allowed
     ordering = "created_at"  # Field for ordering (must be unique) # Use '-id' or '-created_at' for reverse chronological
     cursor_query_param = "cursor"  # Query parameter for cursor
 
