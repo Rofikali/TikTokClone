@@ -197,16 +197,35 @@ export const useUserStore = defineStore('user', () => {
     }
   }
 
+  // async function updateComments(post) {
+  //   const generalStore = useGeneralStore()
+  //   const res = await $axios.get(`/api/profile/${post.user.id}/`)
+
+  //   for (let updatedPost of res.data.posts) {
+  //     if (post.id === updatedPost.id) {
+  //       generalStore.selectedPost.comments = updatedPost.comments
+  //     }
+  //   }
+  // }
+  
   async function updateComments(post) {
     const generalStore = useGeneralStore()
     const res = await $axios.get(`/api/profile/${post.user.id}/`)
 
-    for (let updatedPost of res.data.posts) {
-      if (post.id === updatedPost.id) {
-        generalStore.selectedPost.comments = updatedPost.comments
+    const posts = res?.data?.posts
+
+    if (Array.isArray(posts)) {
+      for (let updatedPost of posts) {
+        if (post.id === updatedPost.id) {
+          generalStore.selectedPost.comments = updatedPost.comments
+          break
+        }
       }
+    } else {
+      console.warn('Expected an array for res.data.posts but got:', posts)
     }
   }
+
 
 
   async function likePost(post, isPostPage) {

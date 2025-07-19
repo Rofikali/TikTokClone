@@ -117,12 +117,12 @@ const post = ref({
     user: props.post?.user || {},
 })
 
-const pauseAllOtherVideos = () => {
-    const allVideos = document.querySelectorAll('video')
-    allVideos.forEach((v) => {
-        if (v !== video.value) v.pause()
-    })
-}
+// const pauseAllOtherVideos = () => {
+//     const allVideos = document.querySelectorAll('video')
+//     allVideos.forEach((v) => {
+//         if (v !== video.value) v.pause()
+//     })
+// }
 
 const handleIntersection = (entry) => {
     if (!video.value) return
@@ -130,7 +130,7 @@ const handleIntersection = (entry) => {
     if (entry.isIntersecting && !playing.value) {
         playing.value = true
         console.log('▶️ Playing post', post.value.id)
-        pauseAllOtherVideos()
+        // pauseAllOtherVideos()
         video.value.play()
 
         if (props.isLastPost && feedStore.hasMore && !feedStore.loading) {

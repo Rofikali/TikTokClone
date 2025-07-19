@@ -20,7 +20,7 @@ class Command(BaseCommand):
             return
 
         # Number of posts to generate
-        num_posts = random.randint(1, 20)
+        num_posts = random.randint(1, 50)
         self.stdout.write(f"Generating {num_posts} posts...")
 
         # Load the video file once

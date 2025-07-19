@@ -18,6 +18,14 @@
 #     urlpatterns += static(settings.MEDIA_URL,
 #                           document_root=settings.MEDIA_ROOT)
 
+# backend/routing.py
+from django.urls import re_path
+from notifications.consumers.like_consumer import LikeConsumer
+
+websocket_urlpatterns = [
+    re_path(r"^ws/likes/$", LikeConsumer.as_asgi()),
+]
+
 
 from django.contrib import admin
 from django.urls import path, include

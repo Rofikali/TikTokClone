@@ -43,7 +43,11 @@ from rest_framework.views import APIView
 from rest_framework.decorators import action
 
 from drf_spectacular.utils import OpenApiParameter
-from pagination.custompagination import CustomCursorPagination
+
+# from common.paginations.custompagination import CustomCursorPagination
+from common.pagination.views import (
+    CustomCursorPagination,
+)  # Adjust the import path as necessary
 
 # rewrite this code to use the CSRF token in the header using viewsets
 
@@ -100,7 +104,6 @@ class RegisterUserViewSet(ViewSet):
 
                 # Optionally create a token
                 token = Token.objects.create(user=user)
-
 
                 response = Response(
                     {

@@ -26,7 +26,7 @@ admin
 admin
 
 ## all in one
-python manage.py makemigrations accounts like comments postsapi core
+python manage.py makemigrations accounts like comments postsapi core common.pagination
 python manage.py migrate
 python manage.py createsuperuser
 Email: admin1@gmail.com
@@ -275,3 +275,57 @@ git merge features
 
 # 3. Push the changes
 git push origin master
+
+/backend/
+├── apps/
+│   ├── accounts/                # user registration, login, profiles, followers
+│   │   ├── models/
+│   │   ├── views/
+│   │   ├── serializers/
+│   │   ├── urls.py
+│   │   └── tasks/               # Celery async tasks (e.g. follow notifications)
+│
+│   ├── posts/                   # video posts, likes, comments
+│   │   ├── models/
+│   │   ├── views/
+│   │   ├── serializers/
+│   │   ├── urls.py
+│   │   └── signals/             # signal handlers (e.g. update like counts)
+│
+│   ├── notifications/          # likes/comments/follow notifications
+│   │   ├── models/
+│   │   ├── views/
+│   │   ├── consumers/          # Django Channels consumers
+│   │   ├── routing.py          # WebSocket routing for notifications
+│   │   └── serializers/
+│
+│   ├── realtime/               # reusable WebSocket logic
+│   │   ├── consumers.py
+│   │   ├── middlewares.py
+│   │   └── utils.py
+│
+│   ├── common/                 # reusable components
+│   │   ├── utils/
+│   │   ├── mixins/
+│   │   ├── pagination/
+│   │   └── permissions/
+│
+├── config/                     # Django settings split by env
+│   ├── settings/
+│   │   ├── base.py
+│   │   ├── dev.py
+│   │   ├── prod.py
+│   ├── urls.py
+│   ├── asgi.py                 # for Channels
+│   └── wsgi.py
+│
+├── routing.py                  # WebSocket top-level routing
+├── manage.py
+├── requirements/
+│   ├── base.txt
+│   ├── dev.txt
+│   ├── prod.txt
+└── .env
+
+
+folder restructureing from here

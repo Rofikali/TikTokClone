@@ -88,7 +88,8 @@ const login = async () => {
         if (!profileId) {
             throw new Error("Profile ID is missing!")
         }
-        router.push({ name: 'profile-id', params: { id: profileId } })
+        // router.push({ name: 'profile-id', params: { id: profileId } })
+        router.push({ name: 'profile-id', params: { id: user_id } })
 
         console.log('🔐 Login modal closed')
         $generalStore.isLoginOpen = false

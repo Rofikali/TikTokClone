@@ -3,7 +3,7 @@ from django.contrib.auth import get_user_model
 from django.core.cache import cache
 from django.db.models import Q
 from drf_spectacular.utils import extend_schema
-from pagination.custompagination import (
+from common.pagination.views import (
     CustomCursorPagination,
 )  # Adjust the import path as necessary
 from rest_framework import status
