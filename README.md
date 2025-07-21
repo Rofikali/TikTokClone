@@ -274,6 +274,7 @@ git merge features
 # 3. Push the changes
 git push origin master
 
+# django rest apis
 /backend/
 ├── apps/
 │   ├── accounts/                # user registration, login, profiles, followers
@@ -290,15 +291,11 @@ git push origin master
 │   │   ├── urls.py
 │   │   └── signals/             # signal handlers (e.g. update like counts)
 │
-│   ├── notifications/          # likes/comments/follow notifications
-│   │   ├── models/
-│   │   ├── views/
-│   │   ├── consumers/          # Django Channels consumers
-│   │   ├── routing.py          # WebSocket routing for notifications
-│   │   └── serializers/
-│
-│   ├── realtime/               # reusable WebSocket logic
-│   │   ├── consumers.py
+│   ├── notifications/               # reusable WebSocket logic
+│   │   ├── consumers
+          ├── consumers.py
+        ├── routers
+          ├── routing.py
 │   │   ├── middlewares.py
 │   │   └── utils.py
 │
@@ -325,5 +322,45 @@ git push origin master
 │   ├── prod.txt
 └── .env
 
+# Nuxt3 frontend with Javascript
 
-folder restructureing from here
+Nuxt3 frontend
+/frontend/
+├── components/              
+│   │   ├── register.vue
+│   │   ├── login.vue
+│   │   ├── sidebar.vue
+│   │   ├── upload.vue
+│   │   └── 
+│
+│   ├── layouts/       
+│   │   ├── mainlayout.vue
+│   │   ├── uploadlayout.vue
+│
+│   ├── middleware/      
+│   │   ├── auth.js
+│
+│   ├── plugins/               
+│   │   ├── axios.js
+│   │   ├── stores.js
+│
+├── stores/                    
+│   ├── profile/
+│   │   ├── profile.js
+│   │   ├── profilePosts.js
+├   ├── utils/
+│       ├── cursorstorefactory.js
+│       ├── observer.js
+        ├── debounce.js       # i will do use and work on it later.  WebSocket top-level routing
+    ├── sockets/               #   WebSocket top-level routing
+│       ├── likes.js
+│       ├── followers.js
+├── search.js                  
+├── user.js
+
+├── pages/
+│   ├── post/
+│   ├      /[id].vue
+│   ├── profile/
+            /[id].vue
+    inde.vue

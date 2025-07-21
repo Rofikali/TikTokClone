@@ -14,15 +14,6 @@ from .models import Post
 from .serializers import PostSerializer
 
 
-# from notifications.broadcasters.like import send_like_notification
-
-# # After like is created
-# send_like_notification(post_id=post.id, liker_id=request.user.id, liked=True)
-
-# # After like is removed
-# send_like_notification(post_id=post.id, liker_id=request.user.id, liked=False)
-
-
 class HomeViewSet(ViewSet):
     @extend_schema(
         request=PostSerializer,
