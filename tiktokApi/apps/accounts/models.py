@@ -1,6 +1,11 @@
 from django.db import models
 from django.contrib.auth.models import BaseUserManager, AbstractUser
-from core.models import AutoUpdate
+
+# from core.models import AutoUpdate
+from apps.core.models import (
+    AutoUpdate,
+)  # Adjust the import based on your project structure
+
 
 class CustomUserManager(BaseUserManager):
     """
@@ -27,7 +32,6 @@ class CustomUserManager(BaseUserManager):
             raise ValueError("Superuser must have is_superuser=True.")
 
         return self.create_user(email, password, **extra_fields)
-
 
 
 class User(AbstractUser, AutoUpdate):

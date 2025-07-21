@@ -10,16 +10,16 @@ from django.middleware.csrf import get_token
 from django.template.loader import render_to_string
 from django.urls import reverse
 from django.utils.http import urlsafe_base64_decode, urlsafe_base64_encode
-from postsapi.serializers import PostSerializer
+from apps.postsapi.serializers import PostSerializer
 from rest_framework import status, viewsets
 from rest_framework.authtoken.models import Token
 from rest_framework.exceptions import ValidationError
 from rest_framework.permissions import AllowAny, IsAuthenticated
-from postsapi.models import Post
+from apps.postsapi.models import Post
 from rest_framework.response import Response
 from rest_framework.viewsets import ViewSet
 from drf_spectacular.utils import extend_schema
-from core.services import ImageFileService
+from apps.core.services import ImageFileService
 from .serializers import UpdateUserImageSerializer, UserSerializer
 from .serializers import (
     LoginSerializer,

@@ -308,7 +308,7 @@ git push origin master
 │   │   ├── pagination/
 │   │   └── permissions/
 │
-├── config/                     # Django settings split by env
+├── backend/                     # Django settings split by env
 │   ├── settings/
 │   │   ├── base.py
 │   │   ├── dev.py

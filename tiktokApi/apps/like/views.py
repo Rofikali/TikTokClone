@@ -3,7 +3,7 @@ from rest_framework import status
 from django.shortcuts import get_object_or_404
 
 # from accounts.models import Post
-from postsapi.models import Post
+from apps.postsapi.models import Post
 from .models import Like
 from .serializers import LikeSerializer
 from .utils import LikeCache  # Import LikeCache class

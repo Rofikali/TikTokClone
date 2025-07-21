@@ -1,5 +1,8 @@
 from requests import get
-from core.models import AutoUpdate
+
+from apps.core.models import (
+    AutoUpdate,
+)  # Adjust the import based on your project structure
 from django.db import models
 from django.contrib.auth import get_user_model
 
