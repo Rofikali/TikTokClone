@@ -94,9 +94,10 @@
 
 <script setup>
 import { ref, computed, onUnmounted } from 'vue'
-import { useRouter, useNuxtApp } from '#imports'
+// import { useRouter, useNuxtApp } from '#imports'
 import { useFeedStore } from '~/stores/loadMore'
 import { useObserver } from '~/stores/utils/observer'
+
 
 const { $generalStore, $userStore } = useNuxtApp()
 const feedStore = useFeedStore()
@@ -106,6 +107,10 @@ const props = defineProps({
     post: Object,
     isLastPost: Boolean,
 })
+
+
+// console.log('post.id ', props.post.id)
+// console.log('post id ', props.post.id[0])
 
 const video = ref(null)
 const playing = ref(false)
@@ -193,6 +198,8 @@ const displayPost = (post) => {
         router.push({ name: 'post-id', params: { id: post?.id } })
     }, 200)
 }
+
+
 
 onUnmounted(() => {
     if (video.value) video.value.pause()

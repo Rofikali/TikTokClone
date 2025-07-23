@@ -1,7 +1,7 @@
-from comments.serializers import CommentSerializer
+from apps.comments.serializers import CommentSerializer
 from django.conf import settings
 from django.contrib.auth import get_user_model
-from like.serializers import LikeSerializer
+from apps.like.serializers import LikeSerializer
 from rest_framework import serializers
 
 from .models import Post

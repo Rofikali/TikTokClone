@@ -43,11 +43,11 @@ urlpatterns = [
     path("admin/", admin.site.urls),
     # API apps
     # path("api/", include("api.urls")),
-    path("api/", include("accounts.urls")),
-    path("api/", include("like.urls")),
-    path("api/", include("comments.urls")),
-    path("api/", include("search.urls")),
-    path("api/", include("postsapi.urls")),
+    path("api/", include("apps.accounts.urls")),
+    path("api/", include("apps.like.urls")),
+    path("api/", include("apps.comments.urls")),
+    path("api/", include("apps.search.urls")),
+    path("api/", include("apps.postsapi.urls")),
     # DRF Spectacular schema and docs
     path("api/schema/", SpectacularAPIView.as_view(), name="schema"),
     path(

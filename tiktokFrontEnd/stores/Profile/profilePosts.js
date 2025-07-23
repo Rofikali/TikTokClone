@@ -54,7 +54,7 @@
 
 import { defineStore } from 'pinia'
 import { useNuxtApp } from '#app'
-import { useRoute } from 'vue-router'
+// import { useRoute } from 'vue-router'
 import { computed } from 'vue'
 import { createCursorStore } from '~/stores/utils/cursorStoreFactory'
 

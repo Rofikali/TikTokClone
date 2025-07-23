@@ -2,10 +2,10 @@ from django.core.cache import cache
 from django.db import models
 # from accounts.models import Post, AutoUpdate, User
 
-from postsapi.models import Post
+from apps.postsapi.models import Post
 
 # from accounts.models import AutoUpdate, User
-from core.models import AutoUpdate
+from apps.core.models import AutoUpdate
 from django.contrib.auth import get_user_model
 
 User = get_user_model()

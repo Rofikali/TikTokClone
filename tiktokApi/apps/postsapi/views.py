@@ -1,7 +1,7 @@
 from common.pagination.views import (
     CustomCursorPagination,
 )  # Adjust the import path as necessary
-from core.services import FileService  # if you have this service
+from apps.core.services import FileService  # if you have this service
 from django.shortcuts import get_object_or_404
 from drf_spectacular.utils import extend_schema
 from rest_framework import status
@@ -12,15 +12,6 @@ from rest_framework.viewsets import ViewSet
 
 from .models import Post
 from .serializers import PostSerializer
-
-
-# from notifications.broadcasters.like import send_like_notification
-
-# # After like is created
-# send_like_notification(post_id=post.id, liker_id=request.user.id, liked=True)
-
-# # After like is removed
-# send_like_notification(post_id=post.id, liker_id=request.user.id, liked=False)
 
 
 class HomeViewSet(ViewSet):

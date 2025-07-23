@@ -1,9 +1,9 @@
 from django.db import models
 
 # from accounts.models import User, Post, AutoUpdate
-from core.models import AutoUpdate
+from apps.core.models import AutoUpdate
 from django.contrib.auth import get_user_model
-from postsapi.models import Post
+from apps.postsapi.models import Post
 
 User = get_user_model()
 

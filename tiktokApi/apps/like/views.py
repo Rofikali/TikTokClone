@@ -3,7 +3,7 @@ from rest_framework import status
 from django.shortcuts import get_object_or_404
 
 # from accounts.models import Post
-from postsapi.models import Post
+from apps.postsapi.models import Post
 from .models import Like
 from .serializers import LikeSerializer
 from .utils import LikeCache  # Import LikeCache class
@@ -18,6 +18,10 @@ from .models import Post
 # from .cache import LikeCache  # Assuming you have this
 from rest_framework.authentication import SessionAuthentication
 from drf_spectacular.utils import extend_schema
+
+# starting djagno channels from here
+from channels.layers import get_channel_layer
+from asgiref.sync import async_to_sync
 
 
 class LikeViewSet(ViewSet):
@@ -63,6 +67,29 @@ class LikeViewSet(ViewSet):
 
         LikeCache.update_likes_cache(post.id)
         likes_count = LikeCache.get_cached_likes_count(post.id)
+
+        # === ✅ WebSocket Notification ===
+        if post.user.id != request.user.id:  # don't notify self-likes
+            channel_layer = get_channel_layer()
+            async_to_sync(channel_layer.group_send)(
+                f"user_{post.user.id}",  # Group based on post owner
+                {
+                    "type": "send_notification",
+                    "message": {
+                        "type": "like",
+                        "title": "New Like",
+                        "message": f"{request.user.username} liked your post",
+                        "liker": {
+                            "id": request.user.id,
+                            "username": request.user.username,
+                        },
+                        "post_id": post.id,
+                        "likes_count": likes_count,
+                    },
+                },
+            )
+        # === ✅ End WebSocket Notification ===
+        
 
         return Response(
             {"like": LikeSerializer(like).data, "likes_count": likes_count},

@@ -1,40 +1,50 @@
-# from realtime.base_consumer import BaseConsumer
+# from channels.generic.websocket import AsyncWebsocketConsumer
+# import json
 
-
-# class LikeConsumer(BaseConsumer):
-#     async def connect(self):
-#         self.post_id = self.scope["url_route"]["kwargs"]["post_id"]
-#         self.group_name = f"post_{self.post_id}"
-
-#         await super().connect()
-
-#         if self.user.is_authenticated:
-#             await self.channel_layer.group_add(self.group_name, self.channel_name)
-
-#     async def disconnect(self, close_code):
-#         await self.channel_layer.group_discard(self.group_name, self.channel_name)
-
-#     async def send_like(self, event):
-#         await self.send_json(event["data"])
-
-# notifications/consumers/like_consumer.py
-
-from channels.generic.websocket import AsyncWebsocketConsumer
 
 # class LikeConsumer(AsyncWebsocketConsumer):
 #     async def connect(self):
 #         await self.accept()
-#         await self.send(text_data=json.dumps({"message": "WebSocket connected."}))
+#         print("🟢 WebSocket connected")
+#         await self.send(
+#             text_data=json.dumps(
+#                 {
+#                     "type": "connection",
+#                     "message": "🔗 WebSocket connection established!",
+#                 }
+#             )
+#         )
 
-#     async def disconnect(self, close_code):
-#         pass
+#     async def receive(self, text_data):
+#         print(f"📨 Received from frontend: {text_data}")
+#         data = json.loads(text_data)
+
+#         # Sample logic based on frontend message
+#         message = data.get("message", "")
+#         if message.lower() == "like":
+#             response = "👍 Like received"
+#         elif message.lower() == "hello":
+#             response = "👋 Hello to you too!"
+#         else:
+#             response = f"Echo: {message}"
+
+#         await self.send(text_data=json.dumps({"type": "response", "message": response}))
+
+
+import json
+from channels.generic.websocket import AsyncWebsocketConsumer
 
 
 class LikeConsumer(AsyncWebsocketConsumer):
     async def connect(self):
-        await self.accept()
-        await self.send(text_data="🔗 WebSocket connection established!")
+        self.user_id = self.scope["url_route"]["kwargs"]["user_id"]
+        self.group_name = f"user_{self.user_id}"
 
-    async def receive(self, text_data):
-        # Echo the same message back
-        await self.send(text_data=f"Echo: {text_data}")
+        await self.channel_layer.group_add(self.group_name, self.channel_name)
+        await self.accept()
+
+    async def disconnect(self, close_code):
+        await self.channel_layer.group_discard(self.group_name, self.channel_name)
+
+    async def send_notification(self, event):
+        await self.send(text_data=json.dumps(event["message"]))

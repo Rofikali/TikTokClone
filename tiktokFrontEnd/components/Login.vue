@@ -79,16 +79,6 @@ const login = async () => {
             return
         }
 
-        const profileData = await $profileStore.getProfile(user_id)
-
-        console.log('🔍 Profile data fetched:', profileData);
-
-
-        const profileId = profileData?.user?.id
-        if (!profileId) {
-            throw new Error("Profile ID is missing!")
-        }
-        // router.push({ name: 'profile-id', params: { id: profileId } })
         router.push({ name: 'profile-id', params: { id: user_id } })
 
         console.log('🔐 Login modal closed')
