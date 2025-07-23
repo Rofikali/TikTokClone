@@ -362,3 +362,5 @@ git push origin master
 │   ├── profile/
             /[id].vue
     inde.vue
+
+gonna host to railway
