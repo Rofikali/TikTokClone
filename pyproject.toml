@@ -8,6 +8,8 @@ dependencies = [
     "asgiref==3.8.1",
     "attrs==25.3.0",
     "certifi==2024.7.4",
+    "channels>=4.2.2",
+    "channels-redis>=4.2.1",
     "charset-normalizer==3.3.2",
     "django==5.0.6",
     "django-cors-headers==4.4.0",
@@ -33,7 +35,9 @@ dependencies = [
     "rpds-py==0.24.0",
     "six==1.16.0",
     "sqlparse==0.5.0",
+    "tkinterdnd2>=0.4.3",
     "tzdata==2024.1",
     "uritemplate==4.1.1",
     "urllib3==2.2.2",
+    "uvicorn>=0.35.0",
 ]
