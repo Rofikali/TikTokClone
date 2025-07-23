@@ -113,7 +113,7 @@ console.log('⏳ loading:', loading)
 onMounted(async () => {
     await profileStore.getProfile(route.params.id)
     await postStore.loadProfilePosts(route.params.id)
-
+ 
     console.log('✅ Finished onMounted. hasMore:', hasMore.value)
 })
 
