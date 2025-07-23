@@ -207,7 +207,7 @@ export const useUserStore = defineStore('user', () => {
   //     }
   //   }
   // }
-  
+
   async function updateComments(post) {
     const generalStore = useGeneralStore()
     const res = await $axios.get(`/api/profile/${post.user.id}/`)
@@ -274,10 +274,10 @@ export const useUserStore = defineStore('user', () => {
     try {
       const res = await $axios.post('/api/logout/', {
         withCredentials: true,
-        headers: {
-          'Authorization': `Token ${useCookie('csrftoken').value}`,
-          'X-CSRFToken': useCookie('csrftoken').value || ''
-        }
+        // headers: {
+        //   'Authorization': `Token ${useCookie('csrftoken').value}`,
+        //   'X-CSRFToken': useCookie('csrftoken').value || ''
+        // }
       }
       )
     } catch (error) {

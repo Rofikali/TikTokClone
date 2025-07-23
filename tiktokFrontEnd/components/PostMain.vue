@@ -94,7 +94,7 @@
 
 <script setup>
 import { ref, computed, onUnmounted } from 'vue'
-import { useRouter, useNuxtApp } from '#imports'
+// import { useRouter, useNuxtApp } from '#imports'
 import { useFeedStore } from '~/stores/loadMore'
 import { useObserver } from '~/stores/utils/observer'
 
