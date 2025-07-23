@@ -323,8 +323,6 @@ git push origin master
 └── .env
 
 # Nuxt3 frontend with Javascript
-
-Nuxt3 frontend
 /frontend/
 ├── components/              
 │   │   ├── register.vue
