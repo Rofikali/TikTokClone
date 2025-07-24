@@ -11,6 +11,7 @@ dependencies = [
     "channels>=4.2.2",
     "channels-redis>=4.2.1",
     "charset-normalizer==3.3.2",
+    "dj-database-url>=3.0.1",
     "django==5.0.6",
     "django-cors-headers==4.4.0",
     "django-js-asset==2.2.0",

@@ -363,4 +363,30 @@ git push origin master
             /[id].vue
     inde.vue
 
-gonna host to railway
+<!-- gonna host to railway -->
+# Postgresql database here 
+psql -U postgres -h localhost
+postgres password - admin
+
+# logged in as a admin user with password
+psql -U admin -d tiktokapi -h localhost
+
+
+# -- 1. Create the user
+CREATE USER admin WITH PASSWORD 'admin';
+
+# -- 2. Grant full privileges on all databases (or just one)
+# -- If you have a specific DB (like tiktokdb), grant access to that:
+GRANT ALL PRIVILEGES ON DATABASE tiktokdb TO admin;
+
+# -- 3. (Optional) Make the user a superuser (only for development)
+# -- This gives ALL permissions — use only in local/dev
+ALTER USER admin WITH SUPERUSER;
+
+# clear screen 
+\! cls
+
+
+
+CREATE DATABASE tiktokapi;
+GRANT ALL PRIVILEGES ON DATABASE tiktokapi TO admin;
