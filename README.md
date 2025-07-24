@@ -369,7 +369,7 @@ psql -U postgres -h localhost
 postgres password - adminworld@#$
 
 # logged in as a admin user with password
-psql -U adminworlddb -d tiktokapi -h localhost
+psql -U adminworlddbnot real here -d tiktokapi -h localhost
 
 
 # -- 1. Create the user
