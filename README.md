@@ -366,7 +366,7 @@ git push origin master
 <!-- gonna host to railway -->
 # Postgresql database here 
 psql -U postgres -h localhost
-postgres password - adminworld@#$
+postgres passwordnot real word here - adminworld@#$
 
 # logged in as a admin user with password
 psql -U adminworlddbnot real here -d tiktokapi -h localhost
