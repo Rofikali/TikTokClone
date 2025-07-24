@@ -366,10 +366,10 @@ git push origin master
 <!-- gonna host to railway -->
 # Postgresql database here 
 psql -U postgres -h localhost
-postgres password - admin
+postgres password - adminworld@#$
 
 # logged in as a admin user with password
-psql -U admin -d tiktokapi -h localhost
+psql -U adminworlddb -d tiktokapi -h localhost
 
 
 # -- 1. Create the user
