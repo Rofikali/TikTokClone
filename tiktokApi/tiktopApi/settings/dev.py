@@ -32,15 +32,15 @@ DATABASES = {
     }
 }
 
-CSRF_TRUSTED_ORIGINS = [
-    "http://localhost:3000",  # Frontend origin
-    "http://127.0.0.1:3000",  # Frontend origin
-]
+# CSRF_TRUSTED_ORIGINS = [
+#     "http://localhost:3000",  # Frontend origin
+#     "http://127.0.0.1:3000",  # Frontend origin
+# ]
 
-CORS_ALLOWED_ORIGINS = [
-    "http://localhost:3000",  # Add your frontend's URL
-    "http://127.0.0.1:3000",  # If you're using localhost
-]
+# CORS_ALLOWED_ORIGINS = [
+#     "http://localhost:3000",  # Add your frontend's URL
+#     "http://127.0.0.1:3000",  # If you're using localhost
+# ]
 
 
 # CSRF_COOKIE_SAMESITE = "Lax"
