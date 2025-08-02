@@ -27,12 +27,12 @@
 
 import os
 import sys
-from tiktopApi.settings import base as settings_base
+from tiktopApi.settings import base as base_setting
 
 
 def main():
     """Run administrative tasks."""
-    if settings_base.DEBUG:
+    if base_setting.DEBUG:
         os.environ.setdefault("DJANGO_SETTINGS_MODULE", "tiktopApi.settings.dev")
     else:
         os.environ.setdefault("DJANGO_SETTINGS_MODULE", "tiktopApi.settings.prod")
