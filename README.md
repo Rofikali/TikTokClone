@@ -26,7 +26,7 @@ admin
 admin
 
 ## all in one
-python manage.py makemigrations accounts like comments postsapi core common.pagination
+python manage.py makemigrations accounts like comments postsapi core pagination search
 python manage.py migrate
 python manage.py createsuperuser
 Email: admin1@gmail.com

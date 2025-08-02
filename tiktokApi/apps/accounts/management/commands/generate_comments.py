@@ -3,8 +3,8 @@ from django.core.management.base import BaseCommand
 from faker import Faker
 from django.contrib.auth import get_user_model
 # from your_app.models import Comment, Post  # Replace 'your_app' with your actual app name
-from postsapi.models import Post
-from comments.models import Comment
+from apps.postsapi.models import Post
+from apps.comments.models import Comment
 
 User = get_user_model()
 fake = Faker()
