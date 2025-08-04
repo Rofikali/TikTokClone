@@ -4,8 +4,8 @@ from faker import Faker
 from django.core.management.base import BaseCommand
 from django.utils.timezone import now
 from django.core.files.base import ContentFile
-from accounts.models import User
-from postsapi.models import Post
+from apps.accounts.models import User
+from apps.postsapi.models import Post
 
 
 class Command(BaseCommand):
@@ -25,8 +25,14 @@ class Command(BaseCommand):
 
         # Load the video file once
         video_path = (
-            Path(__file__).resolve().parent.parent.parent.parent / "default.mp4"
+            Path(__file__).resolve().parent.parent.parent.parent.parent / "default.mp4"
         )
+
+        # print(".............>>>>>")
+        # print("video path ,", video_path)
+        # print(Path(__file__).resolve().parent.parent.parent.parent.parent / "default.mp4")
+        # print(".............>>>>>")
+
         with open(video_path, "rb") as f:
             video_bytes = f.read()
 
