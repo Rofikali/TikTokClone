@@ -1,9 +1,11 @@
 {% extends 'admin/base.html' %}
+{% load static %}
+<!-- {% load i18n static %}   -->
 {% block title %}My Admin{% endblock %}
 {% block extrastyle %}
-    <link rel="stylesheet" type="text/css" href="{% static 'admin/css/custom.css' %}">
-{% endblock %}
+<link rel="stylesheet" type="text/css" href="{% static 'admin/css/custom.css' %}">
+{% endblock extrastyle%}
 
 {% block extrahead %}
-    <script type="text/javascript" src="{% static 'admin/js/custom.js' %}"></script>
-{% endblock %}
+<script type="text/javascript" src="{% static 'admin/js/custom.js' %}"></script>
+{% endblock extrahead %}
