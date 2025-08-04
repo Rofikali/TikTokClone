@@ -368,3 +368,4 @@ git push origin master
 gonna host to railway 
 hork home
 going to modularize uis
+going to start adding django channels
