@@ -12,7 +12,6 @@ ALLOWED_HOSTS = os.environ.get("ALLOWED_HOSTS", "*").split(",")
 SECRET_KEY = os.environ.get("SECRET_KEY")
 
 
-
 DATABASES = {
     "default": {
         "ENGINE": "django.db.backends.postgresql",
@@ -24,7 +23,7 @@ DATABASES = {
     }
 }
 
-'''
+"""
 # CSRF_TRUSTED_ORIGINS = [
 #     "https://web-production-9fcc5.up.railway.app",  # ✅ Add production domain here
 # ]
@@ -34,7 +33,7 @@ DATABASES = {
 #     "http://localhost:3000",  # Add your frontend's URL
 #     "http://127.0.0.1:3000",  # If you're using localhost
 # ]
-'''
+"""
 
 CSRF_TRUSTED_ORIGINS = [
     "http://localhost:3000",  # Frontend origin
@@ -47,7 +46,7 @@ CORS_ALLOWED_ORIGINS = [
 ]
 
 # Set CSRF cookie SameSite policy to "Lax" for moderate cross-site protection
-# CSRF_COOKIE_SAMESITE = "Lax" 
+# CSRF_COOKIE_SAMESITE = "Lax"
 # SESSION_COOKIE_SAMESITE = "Lax"
 # CSRF_COOKIE_SECURE = False
 # SESSION_COOKIE_SECURE = False
