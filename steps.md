@@ -106,3 +106,11 @@ templates/
 setting.py
 STATIC_ROOT = BASE_DIR / "static/"
 
+tiktopApi/
+  tiktopApi/
+    settings/
+      base.py
+      ded.py
+
+how use use dir /basedir/templates
+
