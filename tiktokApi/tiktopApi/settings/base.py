@@ -4,7 +4,7 @@ from .prod import *
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
-
+print('what is basedir >>>>>>>>>>------->>>> ', BASE_DIR)
 
 # Application definition
 INSTALLED_APPS = [
@@ -115,6 +115,9 @@ MEDIA_URL = "media/"
 MEDIA_ROOT = os.path.join(BASE_DIR, "media")
 
 
+STATICFILES_DIRS = [
+    BASE_DIR / "static",
+]
 # For redirections, it is django default behaviour
 APPEND_SLASH = False
 
