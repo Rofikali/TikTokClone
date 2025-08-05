@@ -81,3 +81,37 @@ Start Adding ---->
   PostCard.vue       ← Reusable video/post card
   LikeButton.vue     ← Emits like to socket & updates UI
   UserAvatar.vue     ← Reusable user profile image
+
+
+
+templates/
+    admin/
+      includes/
+        objects_tools.html
+        submit_line.html
+      base.html
+      login.html
+      logout.html
+    registration
+      login.html
+      passowrd_change_done.html
+      password_change_form.html
+    static
+      /admin/
+        css/
+          custom.css
+        js/
+          custom.js
+
+setting.py
+STATIC_ROOT = BASE_DIR / "static/"
+
+tiktopApi/
+  tiktopApi/
+    settings/
+      base.py
+      ded.py
+
+how use use dir /basedir/templates
+
+start working with channels

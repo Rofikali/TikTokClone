@@ -14,10 +14,13 @@ SECRET_KEY = os.environ.get("SECRET_KEY")
 DATABASES = {
     "default": {
         "ENGINE": "django.db.backends.sqlite3",
-        "NAME": BASE_DIR / "db.sqlite3",  # noqa: F405
+        "NAME": BASE_DIR.parent / "database" / "db.sqlite3",  # noqa: F405
     }
 }
+
+# print("on dev file ", BASE_DIR.parent)
 # """
+
 
 # Database WITH PostgreSQL
 # https://docs.djangoproject.com/en/5.0/ref/settings/#databases

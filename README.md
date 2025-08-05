@@ -1,9 +1,4 @@
-need to merge ( features/accounts with features/profile ) 
-  git checkout features/accounts  
-    git merge features/profile
-
 ## 1. uv venv
-
 source .venv/Scripts/activate
 
 ## 2. install all requirements.txt data
@@ -12,27 +7,10 @@ uv pip install -r requirements.txt
 ## To Install From an Existing pyproject.toml
 uv pip install -r pyproject.toml
 
-## python manage.py makemigrations
-python manage.py makemigrations accounts like
-python manage.py migrate
-
-## python manage.py migrate
-python manage.py migrate
-
-## python manage.py createsuperuser
-python manage.py createsuperuser
-admin@gmail.com
-admin
-admin
-
 ## all in one
 python manage.py makemigrations accounts like comments postsapi core pagination search
 python manage.py migrate
 python manage.py createsuperuser
-Email: admin1@gmail.com
-Username: admin1
-Password: admin1
-Password (again): admin1
 
 ## generate fake posts with videos
 python manage.py generate_posts
@@ -43,6 +21,7 @@ python manage.py generate_users
 ## generate fake user with videos
 python manage.py generate_likes
 
+<<<<<<< HEAD
 what the hell 
 
 <!-- I CREATE MODELS
@@ -275,6 +254,8 @@ git merge features
 
 # 3. Push the changes
 git push origin master
+=======
+>>>>>>> moduler/UIs
 
 # django rest apis
 /backend/
