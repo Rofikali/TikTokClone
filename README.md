@@ -22,6 +22,29 @@ python manage.py generate_users
 python manage.py generate_likes
 
 
+## DB Issues
+  ----> ble to open database file
+            ls -la /workspaces/TikTokClone/tiktokApi/database
+          mkdir -p database
+
+## Delete pyc ( pycache )
+  find . -name "*.pyc" -delete
+
+## Run Commands Development
+  python manage.py runserver
+
+  Production
+      export ENVIRONMENT=production
+      python manage.py runserver
+
+  GitHub Codespaces:
+      ENVIRONMENT=production python manage.py runserver
+
+
+
+
+
+
 # django rest apis
 /backend/
 ├── apps/

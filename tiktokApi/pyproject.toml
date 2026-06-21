@@ -26,6 +26,7 @@ dependencies = [
     "jsonschema==4.23.0",
     "jsonschema-specifications==2025.4.1",
     "pillow==10.4.0",
+    "psycopg[binary]>=3.3.4",
     "pyjwt==2.8.0",
     "python-dateutil==2.9.0.post0",
     "python-dotenv==1.0.1",

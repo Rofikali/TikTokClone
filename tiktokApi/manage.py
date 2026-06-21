@@ -1,12 +1,71 @@
+#!/usr/bin/env python
+
+import os
+import sys
+
+ENV = os.getenv("ENVIRONMENT", "development")
+
+if ENV == "production":
+    settings_module = "tiktopApi.settings.prod"
+else:
+    settings_module = "tiktopApi.settings.dev"
+
+os.environ.setdefault(
+    "DJANGO_SETTINGS_MODULE",
+    settings_module,
+)
+
+
+def main():
+    try:
+        from django.core.management import execute_from_command_line
+    except ImportError as exc:
+        raise ImportError("Couldn't import Django.") from exc
+
+    execute_from_command_line(sys.argv)
+
+
+if __name__ == "__main__":
+    main()
+
+# # #!/usr/bin/env python
+# # """Django's command-line utility for administrative tasks."""
+# # import os
+# # import sys
+
+
+# # def main():
+# #     """Run administrative tasks."""
+# #     os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'tiktopApi.settings')
+# #     try:
+# #         from django.core.management import execute_from_command_line
+# #     except ImportError as exc:
+# #         raise ImportError(
+# #             "Couldn't import Django. Are you sure it's installed and "
+# #             "available on your PYTHONPATH environment variable? Did you "
+# #             "forget to activate a virtual environment?"
+# #         ) from exc
+# #     execute_from_command_line(sys.argv)
+
+
+# # if __name__ == '__main__':
+# #     main()
+
+
 # #!/usr/bin/env python
 # """Django's command-line utility for administrative tasks."""
+
 # import os
 # import sys
+# from tiktopApi.settings import base as base_setting
 
 
 # def main():
 #     """Run administrative tasks."""
-#     os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'tiktopApi.settings')
+#     if base_setting.DEBUG:
+#         os.environ.setdefault("DJANGO_SETTINGS_MODULE", "tiktopApi.settings.dev")
+#     else:
+#         os.environ.setdefault("DJANGO_SETTINGS_MODULE", "tiktopApi.settings.prod")
 #     try:
 #         from django.core.management import execute_from_command_line
 #     except ImportError as exc:
@@ -18,34 +77,5 @@
 #     execute_from_command_line(sys.argv)
 
 
-# if __name__ == '__main__':
+# if __name__ == "__main__":
 #     main()
-
-
-#!/usr/bin/env python
-"""Django's command-line utility for administrative tasks."""
-
-import os
-import sys
-from tiktopApi.settings import base as base_setting
-
-
-def main():
-    """Run administrative tasks."""
-    if base_setting.DEBUG:
-        os.environ.setdefault("DJANGO_SETTINGS_MODULE", "tiktopApi.settings.dev")
-    else:
-        os.environ.setdefault("DJANGO_SETTINGS_MODULE", "tiktopApi.settings.prod")
-    try:
-        from django.core.management import execute_from_command_line
-    except ImportError as exc:
-        raise ImportError(
-            "Couldn't import Django. Are you sure it's installed and "
-            "available on your PYTHONPATH environment variable? Did you "
-            "forget to activate a virtual environment?"
-        ) from exc
-    execute_from_command_line(sys.argv)
-
-
-if __name__ == "__main__":
-    main()
